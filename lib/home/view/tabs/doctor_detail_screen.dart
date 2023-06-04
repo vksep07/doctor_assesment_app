@@ -1,5 +1,6 @@
 import 'package:doctor_app_assessment/common/services/navigation_service.dart';
 import 'package:doctor_app_assessment/home/bloc/detail_screen_bloc.dart';
+import 'package:doctor_app_assessment/home/network/model/doctor_data_model.dart';
 import 'package:doctor_app_assessment/home/network/model/time_slot_model.dart';
 import 'package:doctor_app_assessment/util/app_logger.dart';
 import 'package:doctor_app_assessment/util/assets.dart';
@@ -12,7 +13,9 @@ import 'package:doctor_app_assessment/util/string_constant.dart';
 import 'package:flutter/material.dart';
 
 class DoctorDetailScreen extends StatefulWidget {
-  const DoctorDetailScreen({Key? key}) : super(key: key);
+  DoctorDataModel? doctorDataModel;
+
+  DoctorDetailScreen({Key? key, this.doctorDataModel}) : super(key: key);
 
   @override
   _DoctorDetailScreenState createState() => _DoctorDetailScreenState();
@@ -109,23 +112,24 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                                         130.heightBox,
                                         DoctorInfo(),
                                         20.heightBox,
-                                        HeadingText(headText: "About Doctor"),
+                                        HeadingText(headText: "${stringConstant.about_doctor}"),
                                         10.heightBox,
                                         ReadMoreText(
-                                          'Flutter is Google’s mobile UI open source framework to build,Flutter is Google’s mobile UI open source framework to build,Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',
+                                          ' ${detailScreenBloc.getSelectedDoctor()?.detail}',
                                           trimLines: 2,
                                           colorClickableText: Colors.blue,
                                           style: TextStyle(color: Colors.black),
                                           trimMode: TrimMode.Line,
-                                          trimCollapsedText: 'show more',
-                                          trimExpandedText: 'show less',
+                                          trimCollapsedText: '${stringConstant.show_more}',
+                                          trimExpandedText: '${stringConstant.show_less}',
                                           moreStyle: TextStyle(
                                               fontSize: 14,
                                               fontWeight: FontWeight.bold),
                                         ),
                                         20.heightBox,
                                         HeadingText(
-                                            headText: "${stringConstant.select_schedule}"),
+                                            headText:
+                                                stringConstant.select_schedule),
                                         10.heightBox,
                                         Calendar(),
                                         20.heightBox,
@@ -202,18 +206,18 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                                     child: CircleAvatar(
                                       radius: 48,
                                       backgroundImage:
-                                          AssetImage('${Assets.doctor4}'),
+                                          AssetImage('${detailScreenBloc.getSelectedDoctor()?.imgPath}'),
                                     ),
                                   )),
                             ),
                             AppTextWidget(
-                              text: "Dr. Varun Kumar",
+                              text: "${detailScreenBloc.getSelectedDoctor()?.doctorName}",
                               size: 20,
                               fontWeight: FontWeight.bold,
                             ),
                             5.heightBox,
                             AppTextWidget(
-                              text: "Heart specialist",
+                              text: "${detailScreenBloc.getSelectedDoctor()?.doctorSpecialistaion}",
                               size: 16,
                               fontWeight: FontWeight.normal,
                               color: Colors.grey.withOpacity(0.70),
@@ -256,20 +260,20 @@ class DoctorInfo extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(left: 0, right: 0),
       child: Row(
-        children: const [
+        children:  [
           NumberCard(
-            label: 'Patients',
-            value: '100+',
+            label: stringConstant.patients,
+            value: '${detailScreenBloc.getSelectedDoctor()?.patients}',
           ),
           SizedBox(width: 15),
           NumberCard(
-            label: 'Experiences',
-            value: '10 years',
+            label: '${stringConstant.experiences}',
+            value: '${detailScreenBloc.getSelectedDoctor()?.experiences}',
           ),
           SizedBox(width: 15),
           NumberCard(
-            label: 'Rating',
-            value: '4.0',
+            label: '${stringConstant.rating}',
+            value: '${detailScreenBloc.getSelectedDoctor()?.rating}',
           ),
         ],
       ),

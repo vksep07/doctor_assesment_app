@@ -1,14 +1,15 @@
 import 'package:doctor_app_assessment/home/bloc/root_screen_bloc.dart';
 import 'package:doctor_app_assessment/home/network/model/bottom_bar_model.dart';
+import 'package:doctor_app_assessment/chat/view/chat_screen.dart';
 import 'package:doctor_app_assessment/home/view/tabs/home_screen.dart';
-import 'package:doctor_app_assessment/home/view/tabs/ScheduleTab.dart';
+import 'package:doctor_app_assessment/util/app_logger.dart';
 import 'package:doctor_app_assessment/util/assets.dart';
 import 'package:doctor_app_assessment/util/colors.dart';
 import 'package:doctor_app_assessment/util/common_widgets/app_text_widget.dart';
 import 'package:doctor_app_assessment/util/common_widgets/extensions.dart';
 import 'package:doctor_app_assessment/util/constants.dart';
 import 'package:doctor_app_assessment/util/string_constant.dart';
-import 'package:doctor_app_assessment/util/styles/MyColors.dart';
+import 'package:doctor_app_assessment/util/toast_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -20,11 +21,12 @@ class RootScreen extends StatefulWidget {
 }
 
 class _RootScreenState extends State<RootScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(MyColors.primary),
+        backgroundColor: AppColors.primary,
         elevation: 0,
         toolbarHeight: 0,
       ),
@@ -38,13 +40,19 @@ class _RootScreenState extends State<RootScreen> {
                   onPressedScheduleCard: () {},
                 );
               } else if (snapshot.data == bottomNavigationBarChat) {
-                return ScheduleTab();
+                return ChatScreen();
               } else {
+                AppLogger.printLog("Under development");
+                ToastUtils.showInfoToast(
+                    msg: "${stringConstant.under_development}");
                 return HomeScreen(
                   onPressedScheduleCard: () {},
                 );
               }
             } else {
+              AppLogger.printLog("Under development");
+              ToastUtils.showInfoToast(
+                  msg: "${stringConstant.under_development}");
               return HomeScreen(
                 onPressedScheduleCard: () {},
               );
@@ -132,14 +140,17 @@ class _RootScreenState extends State<RootScreen> {
             (() {
               if (navigationBarIndex == bottomNavigationBarAdd) {
                 return FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ToastUtils.showInfoToast(
+                        msg: "${stringConstant.under_development}");
+                  },
                   child: Icon(
                     Icons.add,
                     color: Colors.white,
                     size: 29,
                   ),
                   backgroundColor: AppColors.primary,
-                  tooltip: 'Capture Picture',
+                  tooltip: '${stringConstant.book_appointment}',
                   elevation: 5,
                   splashColor: Colors.grey,
                 );

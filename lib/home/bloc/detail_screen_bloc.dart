@@ -1,3 +1,4 @@
+import 'package:doctor_app_assessment/home/network/model/doctor_data_model.dart';
 import 'package:doctor_app_assessment/home/network/model/time_slot_model.dart';
 import 'package:doctor_app_assessment/util/app_logger.dart';
 import 'package:doctor_app_assessment/util/string_constant.dart';
@@ -17,6 +18,16 @@ class DetailScreenBloc {
   BehaviorSubject<String> get timeTextType => _timeTextType;
 
   List<TimeSlotModel> timeSlots = [];
+
+  DoctorDataModel? selectedDoctor;
+
+  void setDoctorModel({DoctorDataModel? doctorDataModel}) {
+    this.selectedDoctor = doctorDataModel;
+  }
+
+  DoctorDataModel? getSelectedDoctor() {
+    return selectedDoctor;
+  }
 
   void getSlotList() {
     DateTime now = DateTime.now();
