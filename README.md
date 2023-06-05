@@ -22,6 +22,9 @@ Time Health is a virtual Doctor appointment booking application, that has been d
 
 ![screeshot_02](https://github.com/vksep07/doctor_assesment_app/assets/16042343/02a29822-097e-434e-ad19-757490aaf8b4)
 
+## App Preview Video
+
+https://github.com/vksep07/doctor_assesment_app/assets/16042343/78421b4e-a107-4683-99c7-60dd1a5a0fd0
 
 
 ## Features
